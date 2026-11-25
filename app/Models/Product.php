@@ -2,24 +2,23 @@
 
 namespace App\Models;
 
-use App\Models\OrderItem;
+use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable("name", "price", "quantity_in_stock")]
+#[Fillable('name', 'price', 'quantity_in_stock')]
 class Product extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProductFactory> */
+    /** @use HasFactory<ProductFactory> */
     use HasFactory;
-
 
     protected function casts()
     {
         return [
-            'price' => 'decimal'
+            'price' => 'decimal:2',
         ];
     }
 
@@ -27,8 +26,8 @@ class Product extends Model
     {
 
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => $value * 100
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100
         );
     }
 

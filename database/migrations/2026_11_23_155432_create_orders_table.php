@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->decimal("total")->default(0);
-            $table->decimal("subtotal")->default(0);
-            $table->string("status");
-            $table->decimal("discount_amount")->nullable();
-            $table->string("discount_type")->nullable();
-            $table->foreignId("user_id");
+            $table->decimal('total')->default(0);
+            $table->decimal('subtotal')->default(0);
+            $table->string('status');
+            $table->decimal('discount_amount')->nullable();
+            $table->string('discount_type')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });
     }
