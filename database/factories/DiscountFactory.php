@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\DiscountType;
 use App\Models\Discount;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,9 @@ class DiscountFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'type' => DiscountType::FIXED,
+            'value' => $this->faker->randomFloat(2, 1, 100),
         ];
     }
 }
