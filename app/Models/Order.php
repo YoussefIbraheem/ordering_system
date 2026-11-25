@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable("total", "subtotal", "discount_amount", "discount_type", "status", "user_id")]
+#[Fillable("total", "subtotal", "status", "user_id", "discount_id")]
 class Order extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderFactory> */
@@ -20,7 +21,6 @@ class Order extends Model
         return [
             "total" => "decimal",
             "subtotal" => "decimal",
-            "discount_amount" => "decimal",
             "status" => OrderStatus::class,
         ];
     }
@@ -34,5 +34,21 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function subtotal(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100
+        );
+    }
+
+    public function total(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100
+        );
     }
 }
