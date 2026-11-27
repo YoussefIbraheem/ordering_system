@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
-    //
+    public function index(): JsonResponse
+    {
+        return response()->json([
+            'data' => Product::query()->orderBy('id')->get(),
+        ]);
+    }
 }
