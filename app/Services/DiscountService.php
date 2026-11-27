@@ -43,10 +43,8 @@ class DiscountService
 
         $total = $order->subtotal - $deducatable_value;
 
-        $order->update([
+        return (bool) $order->update([
             'total' => $total,
         ]);
-
-        return true;
     }
 }

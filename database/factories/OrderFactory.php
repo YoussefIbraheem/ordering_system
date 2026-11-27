@@ -20,6 +20,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => $this->faker->uuid(),
             'subtotal' => $this->faker->randomFloat(2, 1, 100),
             'total' => $this->faker->randomFloat(2, 1, 100),
             'status' => OrderStatus::PENDING,
